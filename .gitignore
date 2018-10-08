@@ -21,6 +21,7 @@
 /yarn-error.log
 
 .byebug_history
+.idea/workspace.xml
 
 # Ignore application configuration
 /config/application.yml
