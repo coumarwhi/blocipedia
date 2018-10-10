@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :wikis
 
+  resources :charges, only: [:new, :create]
+
+  post 'charges/downgrade'
+
   get 'about' => 'welcome#about'
 
   root 'welcome#index'
