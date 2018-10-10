@@ -12,6 +12,20 @@
     password: Faker::String.random(8..15)
 )
 end
+
+User.create!(
+        email: 'blah@blah.com',
+        password: 'password',
+        confirmed_at: DateTime.now
+)
+
+User.create!(
+        email: 'coumarwhi@gmail.com',
+        password: 'coumarwhi3',
+        confirmed_at: DateTime.now,
+        role: 'premium'
+
+)
 users = User.all
 
 10.times do
