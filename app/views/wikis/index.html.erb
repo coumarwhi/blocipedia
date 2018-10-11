@@ -5,7 +5,7 @@
       <h4 class="media-heading">
         <% if current_user.standard? && wiki.private? %>
         <% else current_user.admin? || ( current_user.premium? && (current_user == wiki.user)) %>
-          <%= link_to wiki.title, wiki %>
+          <%= link_to (markdown_to_html wiki.title), wiki %>
         <% end %>
       </h4>
     </div>
