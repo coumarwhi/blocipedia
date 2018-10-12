@@ -1,7 +1,7 @@
 class WikisController < ApplicationController
 
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -52,6 +52,30 @@ class WikisController < ApplicationController
     else
       flash.now[:alert] = "There was an error deleting your wiki."
       render :show
+    end
+  end
+
+  def add_collaborators
+    @user = User.find(params[:user_id])
+    @wiki = Wiki.find(params[:id])
+    if @wiki.users << @user
+      flash[:notice] = "\"#{@user.email}\" is now a collaborator."
+      redirect_to @wiki
+    else
+      flash.now[:alert] = "There was an error adding a collaborator."
+      render :edit
+    end
+  end
+
+  def remove_collaborators
+    @user = User.find(params[:user_id])
+    @wiki = Wiki.find(params[:id])
+    if @wiki.users.delete(@user)
+      flash[:notice] = "\"#{@user.email}\" is no longer a collaborator."
+      redirect_to @wiki
+    else
+      flash.now[:alert] = "There was an error removing the collaborator."
+      render :edit
     end
   end
 

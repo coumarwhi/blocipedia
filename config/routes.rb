@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   post 'charges/downgrade'
 
+  post 'wikis/add_collaborators'
+
+  post 'wikis/remove_collaborators'
+
   get 'about' => 'welcome#about'
 
   root 'welcome#index'

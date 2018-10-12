@@ -15,9 +15,24 @@
       </div>
       <div class="form-group">
         <div class="form-group">
-          <%= render partial: 'form', locals: { wiki: @wiki } %>
+          <%= render partial: 'form', locals: { wiki: @wiki, f: f } %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
+
+<%= form_tag wikis_add_collaborators_path do %>
+  <%= label_tag :add_collaborator %>
+  <%= hidden_field_tag :id, @wiki.id %>
+  <%= select_tag :user_id , options_from_collection_for_select(User.all, 'id', 'email') %>
+  <%= submit_tag "Save", class: 'btn btn-success' %>
+<% end %>
+
+<%= form_tag wikis_remove_collaborators_path do %>
+  <%= label_tag :remove_collaborator %>
+  <%= hidden_field_tag :id, @wiki.id %>
+  <%= select_tag :user_id , options_from_collection_for_select(User.all, 'id', 'email') %>
+  <%= submit_tag "Delete", class: 'btn btn-danger' %>
+<% end %>
