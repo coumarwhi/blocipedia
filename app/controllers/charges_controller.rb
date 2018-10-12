@@ -39,5 +39,12 @@ class ChargesController < ApplicationController
 
   def downgrade
     current_user.update_attribute(:role, 'standard')
+    if current_user.save!
+      flash[:notice] = "Your account has been downgraded. All of your posts are now public."
+      redirect_to root_path
+    else
+      flash[:alert] = "There was an error downgrading your account. Please try again."
+      redirect_to root_path
+    end
   end
 end
