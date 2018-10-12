@@ -1,38 +1,10 @@
 <h1>Edit Wiki</h1>
 
-  <div class="col-md-8">
-    <%= form_for @wiki do |f| %>
-      <div class="form-group">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :body %>
-        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Save", class: 'btn btn-success' %>
-      </div>
-      <div class="form-group">
-        <div class="form-group">
-          <%= render partial: 'form', locals: { wiki: @wiki, f: f } %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+<div class="col-md-8">
+    <%= render partial: 'form', locals: { wiki: @wiki } %>
 </div>
 
 
-<%= form_tag wikis_add_collaborators_path do %>
-  <%= label_tag :add_collaborator %>
-  <%= hidden_field_tag :id, @wiki.id %>
-  <%= select_tag :user_id , options_from_collection_for_select(User.all, 'id', 'email') %>
-  <%= submit_tag "Save", class: 'btn btn-success' %>
-<% end %>
-
-<%= form_tag wikis_remove_collaborators_path do %>
-  <%= label_tag :remove_collaborator %>
-  <%= hidden_field_tag :id, @wiki.id %>
-  <%= select_tag :user_id , options_from_collection_for_select(User.all, 'id', 'email') %>
-  <%= submit_tag "Delete", class: 'btn btn-danger' %>
-<% end %>
+<div class="col-md-8">
+  <%= render partial: 'collaborator', locals: { wiki: @wiki } %>
+</div>
