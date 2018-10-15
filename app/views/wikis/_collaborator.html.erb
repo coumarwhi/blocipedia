@@ -8,6 +8,6 @@
 <%= form_tag wikis_remove_collaborators_path do %>
   <%= label_tag :remove_collaborator %>
   <%= hidden_field_tag :id, @wiki.id %>
-  <%= select_tag :user_id , options_from_collection_for_select(User.all, 'id', 'email') %>
+  <%= select_tag :user_id , options_from_collection_for_select(@wiki.users, 'id', 'email') %>
   <%= submit_tag "Delete", class: 'btn btn-danger' %>
 <% end %>
